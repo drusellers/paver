@@ -143,7 +143,7 @@ fancy_echo "Installing From AppStore ..."
 mas install 406056744  # evernote
 mas install 896450579  # textual
 mas install 1278508951 # trello
-mas install 711830901  # omnigraffle
+mas install 1142578753 # omnigraffle 7
 mas install 425424353  # unarchiver
 mas install 407963104  # pixelmator
 mas install 403388562  # transmit
