@@ -119,6 +119,7 @@ brew "libyaml" # should come after openssl
 brew "node"
 brew "rbenv"
 brew "ruby-build"
+brew "yarn"
 EOF
 
 fancy_echo "Installing from Homebrew Casks ..."
@@ -128,6 +129,8 @@ brew cask install vagrant
 brew cask install beyond-compare
 brew cask install iterm2
 brew cask install slate
+brew cask install gitup
+brew cask install karabiner-elements
 #atom?
 #chrome?
 #rider / intellij / JetBrains management tool
