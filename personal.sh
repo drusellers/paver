@@ -134,19 +134,19 @@ brew cask install slate
 
 
 fancy_echo "Installing From AppStore ..."
-mas install 406056744 # evernote
-mas install 896450579 # textual
-mas install 918858936 # airmail
-mas install 711830901 # omnigraffle
-mas install 425424353 # unarchiver
-mas install 407963104 # pixelmator
-mas install 403388562 # transmit
-mas install 497799835 # xcode
-mas install 803453959 # slack
-mas install 411643860 # daisydisk
-mas install 904280696 # things 3
+mas install 406056744  # evernote
+mas install 896450579  # textual
+mas install 1278508951 # trello
+mas install 711830901  # omnigraffle
+mas install 425424353  # unarchiver
+mas install 407963104  # pixelmator
+mas install 403388562  # transmit
+mas install 497799835  # xcode
+mas install 803453959  # slack
+mas install 411643860  # daisydisk
+mas install 904280696  # things 3
 mas install 1333542190 # 1Password 7
-mas install 975937182 # Fantastical 2
+mas install 975937182  # Fantastical 2
 
 fancy_echo "Configuring Ruby ..."
 find_latest_ruby() {
