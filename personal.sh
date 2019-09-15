@@ -177,3 +177,6 @@ curl https://sh.rustup.rs -sSf | sh
 
 # Configure Slate
 cp slate.cfg ~/.slate
+
+# configure zsh
+sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
