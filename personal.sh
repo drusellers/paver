@@ -122,6 +122,9 @@ brew "ruby-build"
 brew "yarn"
 EOF
 
+fancy_echo "Install Heroku"
+brew tap heroku/brew && brew install heroku
+
 fancy_echo "Installing from Homebrew Casks ..."
 brew cask install visual-studio-code
 brew cask install virtualbox
