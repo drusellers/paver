@@ -104,6 +104,7 @@ brew "mas"
 
 # Unix
 brew "git"
+brew "gcc"
 brew "openssl"
 brew "the_silver_searcher"
 brew "vim"
