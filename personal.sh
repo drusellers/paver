@@ -121,6 +121,10 @@ brew "node"
 brew "rbenv"
 brew "ruby-build"
 brew "yarn"
+
+# install programmer-y font
+tap "homebrew/cask-fonts"
+cask "font-fira-code"
 EOF
 
 fancy_echo "Install Heroku"
