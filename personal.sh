@@ -125,6 +125,9 @@ brew "yarn"
 # install programmer-y font
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
+
+# Console Prompt
+brew "starship"
 EOF
 
 fancy_echo "Install Heroku"
