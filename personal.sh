@@ -112,9 +112,6 @@ brew "zsh"
 brew "pdsh"
 brew "vaulted"
 
-# Heroku
-brew "heroku-toolbelt"
-
 # Programming languages
 brew "libyaml" # should come after openssl
 brew "node"
