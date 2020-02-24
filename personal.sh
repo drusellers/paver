@@ -56,6 +56,9 @@ update_shell() {
     sudo sh -c "echo $shell_path >> /etc/shells"
   fi
   chsh -s "$shell_path"
+
+  # configure zsh
+  sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 }
 
 case "$SHELL" in
@@ -123,12 +126,18 @@ brew "yarn"
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
 
+# Instal Heroku
+tap "heorku/brew"
+brew "heroku"
+
 # Console Prompt
 brew "starship"
 EOF
 
-fancy_echo "Install Heroku"
-brew tap heroku/brew && brew install heroku
+fancy_echo "Configuring Starship"
+append_to_zshrc 'Init Starship'
+append_to_zshrc 'eval "$(starship init zsh)"'
+eval "$(starship init zsh)"
 
 fancy_echo "Installing from Homebrew Casks ..."
 brew cask install visual-studio-code
@@ -160,10 +169,6 @@ mas install 1333542190 # 1Password 7
 mas install 975937182  # Fantastical 2
 
 fancy_echo "Configuring Ruby ..."
-find_latest_ruby() {
-  rbenv install -l | grep -v - | tail -1 | sed -e 's/^ *//'
-}
-
 ruby_version="$(find_latest_ruby)"
 
 # set up ruby in your zshrc
@@ -187,7 +192,10 @@ bundle config --global jobs $((number_of_cores - 1))
 curl https://sh.rustup.rs -sSf | sh
 
 # Configure Slate
-cp slate.cfg ~/.slate
+fancy_echo "Configuring Slate ..."
+cp ~/.paver/slate.cfg ~/.slate
 
-# configure zsh
-sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+cp ~/.paver/.gitconfig ~/.slate
+
+
+# Copy / Symlink .profile to .zprofile etc

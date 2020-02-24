@@ -1,51 +1,52 @@
 [user]
-	name = Dru Sellers
-	email = dru@drusellers.com
+    name = Dru Sellers
+    email = dru@drusellers.com
 [core]
-	editor = atom --wait
-	autocrlf = false
+    editor = code --wait
+    autocrlf = false
 [diff]
-	tool = bc3
-	renames = copies
+    tool = bc3
+    renames = copies
 [difftool]
-	prompt = false
+    prompt = false
 [difftool "bc3"]
-	path = /usr/local/bin/bcomp
+    path = /usr/local/bin/bcomp
 [merge]
-	tool = bc3
+    tool = bc3
 [mergetool "bc3"]
-	path = /usr/local/bin/bcomp
-	trustExitCode = true
+    path = /usr/local/bin/bcomp
+    trustExitCode = true
 [alias]
-	st = status
-	c = commit -m
-	aa = add -A
-	fa = !git fetch --all --prune
-	co = checkout
-	pu = clean -dfx
-  new = "!f() { git checkout -b \"dds/$1\"; }; f"
-	pf = push --force-with-lease
-	rom = rebase origin/master
-	rod = rebase origin/develop
-	graph = log --graph --decorate --pretty=oneline --abbrev-commit
-	diffdir = difftool --dir-diff --tool=bc3 --no-prompt
+    st = status
+    c = commit -m
+    aa = add -A
+    fa = !git fetch --all --prune
+    co = checkout
+    pu = clean -dfx
+    new = "!f() { git checkout -b \"dds/$1\"; }; f"
+    pnb = push -u origin HEAD
+    pf = push --force-with-lease
+    rom = rebase origin/master
+    rod = rebase origin/develop
+    graph = log --graph --decorate --pretty=oneline --abbrev-commit
+    diffdir = difftool --dir-diff --tool=bc3 --no-prompt
 [log]
-	date = relative
+    date = relative
 [branch]
-	autosetupmerge = true
+    autosetupmerge = true
 [mergetool]
-	keepBackup = false
-	prompt = false
+    keepBackup = false
+    prompt = false
 [push]
-	default = simple
+    default = simple
 [credential]
-	helper = store
+    helper = store
 [rebase]
-	autosquash = true
-	autoStash = true
+    autosquash = true
+    autoStash = true
 [fetch]
-	prune = true
+    prune = true
 [pager]
   branch = cat
 [rerere]
-	enabled = true
+    enabled = true
