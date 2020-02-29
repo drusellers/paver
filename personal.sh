@@ -114,6 +114,7 @@ brew "vim"
 brew "zsh"
 brew "pdsh"
 brew "vaulted"
+brew "tree"
 
 # Programming languages
 brew "libyaml" # should come after openssl
