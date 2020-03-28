@@ -12,7 +12,7 @@
     # Copy down the paver content using system git
     git clone git@github.com:drusellers/paver.git .paver
 
-    sh ~/.paver/install.sh
+    sh ~/.paver/setup
 )
 
 

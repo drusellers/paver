@@ -24,9 +24,13 @@ if [ ! -f "$HOME/.zshrc" ]; then
   touch "$HOME/.zshrc"
 fi
 
-# add the user bin to path
-# shellcheck disable=SC2016
-append_to_zshrc 'export PATH="$HOME/bin:$PATH"'
+if [ ! -d "$HOME/.config" ]; then
+  mkdir -p ~/.config
+fi
+
+fancy_echo "Setup .zprofile"
+cp .zprofile ~/.zprofile
+# TODO: link to .profile too
 
 # This is where homebrew installs to
 HOMEBREW_PREFIX="/usr/local"
@@ -43,34 +47,7 @@ else
   sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
 fi
 
-##
-# Switch shell to ZSH
-##
-update_shell() {
-  local shell_path;
-  shell_path="$(which zsh)"
 
-  fancy_echo "Changing your shell to zsh ..."
-  if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-    fancy_echo "Adding '$shell_path' to /etc/shells"
-    sudo sh -c "echo $shell_path >> /etc/shells"
-  fi
-  chsh -s "$shell_path"
-
-  # configure zsh
-  sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
-}
-
-case "$SHELL" in
-  */zsh)
-    if [ "$(which zsh)" != '/bin/zsh' ] ; then
-      update_shell
-    fi
-    ;;
-  *)
-    update_shell
-    ;;
-esac
 
 ##
 # Install Homebrew
@@ -80,78 +57,27 @@ if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
     curl -fsS \
       'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
-
-    append_to_zshrc '# recommended by brew doctor'
-
-    # shellcheck disable=SC2016
-    append_to_zshrc 'export PATH="/usr/local/bin:$PATH"' 1
-
-    export PATH="/usr/local/bin:$PATH"
-fi
-
-if brew list | grep -Fq brew-cask; then
-  # cask is now built into homebrew
-  fancy_echo "Uninstalling old Homebrew-Cask ..."
-  brew uninstall --force brew-cask
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
 brew update
 
 fancy_echo "Installing from Homebrew ..."
-brew bundle --file=- <<EOF
-tap "homebrew/services"
-
-#Mac App Store
-brew "mas"
-
-# Unix
-brew "git"
-brew "gcc"
-brew "openssl"
-brew "the_silver_searcher"
-brew "vim"
-brew "zsh"
-brew "pdsh"
-brew "vaulted"
-brew "tree"
-
-# Programming languages
-brew "libyaml" # should come after openssl
-brew "node"
-brew "rbenv"
-brew "ruby-build"
-brew "yarn"
-
-# install programmer-y font
-tap "homebrew/cask-fonts"
-cask "font-fira-code"
-
-# Instal Heroku
-tap "heorku/brew"
-brew "heroku"
-
-# Console Prompt
-brew "starship"
-EOF
+if [ "$(uname)" == "Darwin" ]; then
+  # Install homebrew packages
+  fancy_echo "Checking Homebrew dependencies... "
+  brew bundle check || (
+    brew bundle
+    echo
+  )
+fi
 
 fancy_echo "Configuring Starship"
-append_to_zshrc 'Init Starship'
-append_to_zshrc 'eval "$(starship init zsh)"'
+cp ./.config/starship.toml ~/.config/starship.toml
 eval "$(starship init zsh)"
 
-fancy_echo "Installing from Homebrew Casks ..."
-brew cask install visual-studio-code
-brew cask install virtualbox
-brew cask install vagrant
-brew cask install beyond-compare
-brew cask install iterm2
-brew cask install slate
-brew cask install gitup
-brew cask install karabiner-elements
-#atom?
-#chrome?
-#rider / intellij / JetBrains management tool
+fancy_echo "Configure Slate ..."
+cp ./slate.cfg ~/.slate
 
 
 fancy_echo "Installing From AppStore ..."
@@ -171,13 +97,6 @@ mas install 975937182  # Fantastical 2
 
 fancy_echo "Configuring Ruby ..."
 ruby_version="$(find_latest_ruby)"
-
-# set up ruby in your zshrc
-# shellcheck disable=SC2016
-append_to_zshrc 'eval "$(rbenv init - --no-rehash)"' 1
-eval "$(rbenv init -)"
-
-# install the most recent version of ruby
 if ! rbenv versions | grep -Fq "$ruby_version"; then
   RUBY_CONFIGURE_OPTS=--with-openssl-dir=/usr/local/opt/openssl rbenv install -s "$ruby_version"
 fi
@@ -196,7 +115,5 @@ curl https://sh.rustup.rs -sSf | sh
 fancy_echo "Configuring Slate ..."
 cp ~/.paver/slate.cfg ~/.slate
 
-cp ~/.paver/.gitconfig ~/.slate
-
-
-# Copy / Symlink .profile to .zprofile etc
+fancy_echo "Configuring Git ..."
+cp ~/.paver/.gitconfig ~/.gitconfig
