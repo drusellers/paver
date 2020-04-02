@@ -1,0 +1,11 @@
+Host github.com
+
+Host * !github.com !gitlab.com
+  StrictHostKeyChecking no
+  PermitLocalCommand yes
+  ForwardAgent yes
+
+  LocalCommand scp -r ~/dev/omc/hsld/src/.bash_profile %h:~/ && scp -r ~/dev/omc/hsld/src/bin/ %h:~/
+
+Host *.omc
+  ProxyCommand `omc-ssh %r %h %p`
