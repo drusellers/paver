@@ -76,8 +76,9 @@ fancy_echo "Configuring Starship"
 cp ./.config/starship.toml ~/.config/starship.toml
 eval "$(starship init zsh)"
 
-fancy_echo "Configure Slate ..."
-cp ./slate.cfg ~/.slate
+fancy_echo "Configure Hammerspoon ..."
+mkdir -p ~/.hammerspoon
+cp ./hammerspoon.lua ~/.hammerspoon/init.lua
 
 fancy_echo "Configuring Ruby ..."
 ruby_version="$(find_latest_ruby)"

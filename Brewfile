@@ -42,7 +42,7 @@ cask "vagrant"
 
 # sanity
 cask "iterm2"
-cask "slate"
+cask "hammerspoon"
 cask "gitup"
 cask "karabiner-elements"
 
