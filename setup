@@ -16,14 +16,17 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 set -e
 
 # setup our home bin dir
+fancy_echo "Setup ~/bin"
 if [ ! -d "$HOME/bin/" ]; then
   mkdir "$HOME/bin"
 fi
 
+fancy_echo "touch ~/.zshrc"
 if [ ! -f "$HOME/.zshrc" ]; then
   touch "$HOME/.zshrc"
 fi
 
+fancy_echo "mkdir -p ~/.config"
 if [ ! -d "$HOME/.config" ]; then
   mkdir -p ~/.config
 fi
@@ -37,6 +40,7 @@ HOMEBREW_PREFIX="/usr/local"
 
 # LOGNAME is defined by the shell
 # groups: `admin` - default for mac
+fancy_echo "Setup Homebrew Directory"
 if [ -d "$HOMEBREW_PREFIX" ]; then
   if ! [ -r "$HOMEBREW_PREFIX" ]; then
     sudo chown -R "$LOGNAME:admin" /usr/local
@@ -46,8 +50,6 @@ else
   sudo chflags norestricted "$HOMEBREW_PREFIX"
   sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
 fi
-
-
 
 ##
 # Install Homebrew
@@ -72,15 +74,12 @@ if [ "$(uname)" == "Darwin" ]; then
   )
 fi
 
-fancy_echo "Configuring Starship"
-cp ./.config/starship.toml ~/.config/starship.toml
-eval "$(starship init zsh)"
-
 fancy_echo "Configure Hammerspoon ..."
 mkdir -p ~/.hammerspoon
 cp ./hammerspoon.lua ~/.hammerspoon/init.lua
 
 fancy_echo "Configuring Ruby ..."
+eval "$(rbenv init -)"
 ruby_version="$(find_latest_ruby)"
 if ! rbenv versions | grep -Fq "$ruby_version"; then
   RUBY_CONFIGURE_OPTS=--with-openssl-dir=/usr/local/opt/openssl rbenv install -s "$ruby_version"
@@ -93,12 +92,13 @@ gem_install_or_update 'bundler'
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
 
-#Install Rustup
-curl https://sh.rustup.rs -sSf | sh
+fancy_echo "Installing Rust ..."
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
+source $HOME/.cargo/env
 
-# Configure Slate
-fancy_echo "Configuring Slate ..."
-cp ~/.paver/slate.cfg ~/.slate
+fancy_echo "Configuring Starship"
+cp ./.config/starship.toml ~/.config/starship.toml
+# eval "$(starship init zsh)"
 
 fancy_echo "Configuring Git ..."
-cp ~/.paver/.gitconfig ~/.gitconfig
+# cp ~/.paver/.gitconfig ~/.gitconfig

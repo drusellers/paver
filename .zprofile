@@ -38,7 +38,7 @@ eval "$(rbenv init -)"
 export PATH="$PATH:/Users/drusellers/Library/Python/3.7/bin"
 
 # Rust
-export PATH="$PATH:/Users/drusellers/.cargo/bin"
+source $HOME/.cargo/env
 
 # OMC GitHub Package Repository
 export GPR_AUTH_TOKEN="..."
