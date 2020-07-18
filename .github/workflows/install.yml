@@ -1,0 +1,19 @@
+name: install
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+
+jobs:
+  install:
+    name: Install Tools
+    runs-on: macos-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: ~/setup
+        run: |
+          bash "${GITHUB_WORKSPACE}/setup"
