@@ -14,6 +14,8 @@ brew "zsh"
 brew "pdsh"
 brew "vaulted"
 brew "tree"
+# a better `ls`
+brew "exa"
 
 # Programming languages
 # brew "node"
