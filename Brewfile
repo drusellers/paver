@@ -16,6 +16,8 @@ brew "vaulted"
 brew "tree"
 # a better `ls`
 brew "exa"
+# a better `cat`
+brew "bat"
 
 # Programming languages
 # brew "node"
