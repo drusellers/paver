@@ -13,15 +13,16 @@ brew "vim"
 brew "zsh"
 brew "pdsh"
 brew "vaulted"
-brew "tree"
-# a better `ls`
-brew "exa"
-# a better `cat`
-brew "bat"
+brew "exa" # rust "ls" replacement with tree support
+brew "bat" # rust "cat" replacement
+brew "git-delta" # better git diff
 
 # Programming languages
 # brew "node"
 # brew "yarn"
+# tap "AdoptOpenJDK/openjdk"
+# cask "adoptopenjdk11"
+
 brew "rbenv"
 brew "ruby-build"
 
@@ -29,6 +30,7 @@ brew "ruby-build"
 # install programmer-y font
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
+cask "font-hack-nerd-font"
 
 # Instal Heroku
 # tap "heorku/brew" # I've had issues with git credentials here

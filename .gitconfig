@@ -4,6 +4,10 @@
 [core]
     editor = code --wait
     autocrlf = false
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Monokai Extended
 [diff]
     tool = bc3
     renames = copies
@@ -50,3 +54,7 @@
   branch = cat
 [rerere]
     enabled = true
+[pull]
+	ff = only
+[interactive]
+    diffFilter = delta --color-only
