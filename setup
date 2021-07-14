@@ -102,3 +102,6 @@ cp ./.config/starship.toml ~/.config/starship.toml
 
 fancy_echo "Configuring Git ..."
 # cp ~/.paver/.gitconfig ~/.gitconfig
+
+fancy_echo "Configuring psqlrc"
+cp ./.psqlrc ~/.psqlrc
