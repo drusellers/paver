@@ -7,6 +7,7 @@ brew "mas"
 brew "git"
 brew "gcc"
 brew "openssl"
+cask "gpg-suite-no-mail" # for gpg keys
 brew "libyaml" # should come after openssl
 brew "the_silver_searcher"
 brew "vim"
@@ -16,6 +17,7 @@ brew "vaulted"
 brew "exa" # rust "ls" replacement with tree support
 brew "bat" # rust "cat" replacement
 brew "git-delta" # better git diff
+brew "dog" # better dig
 
 # Programming languages
 # brew "node"

@@ -1,4 +1,4 @@
-\set HISTFILE ~\.psql_history- :DBNAME
+\set HISTFILE ~/.psql_history-:DBNAME
 \set COMP_KEYWORD_CASE upper
 \pset null '<null>'
 \pset pager off
