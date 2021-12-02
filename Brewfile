@@ -1,69 +1,83 @@
-tap "homebrew/services"
+# tap "homebrew/services"
 
-#Mac App Store
-brew "mas"
+# Browsers
+# cask "firefox"
+# cask "google-chrome"
+# cask "brave-browser"
+
+# Productivity
+cask "iterm2"
+cask "hammerspoon"
+cask "karabiner-elements"
+brew "starship" # command prompt
 
 # Unix
-brew "git"
 brew "gcc"
 brew "openssl"
 cask "gpg-suite-no-mail" # for gpg keys
 brew "libyaml" # should come after openssl
 brew "the_silver_searcher"
-brew "vim"
 brew "zsh"
-brew "pdsh"
-brew "vaulted"
+brew "dog" # better dig
+brew "zoxide" # better cd
+brew "fzf" # supports zoxide
+brew "curl"
+brew "wget"
+brew "jq" # json parsing
+brew "tree"
 brew "exa" # rust "ls" replacement with tree support
+
+# Development
+# cask "jetbrains-toolbox"
+# rider
+# intellij
+# datagrip
+# clion
+
+brew "git"
+brew "vim"
+brew "vaulted" # secure shell environment
 brew "bat" # rust "cat" replacement
 brew "git-delta" # better git diff
-brew "dog" # better dig
-
+cask "gitup"
 # Programming languages
 # brew "node"
+# brew "nvm"
 # brew "yarn"
+# cask "dotnet-sdk"
 # tap "AdoptOpenJDK/openjdk"
+# cask "adoptopenjdk8"
 # cask "adoptopenjdk11"
+# brew "leiningen"
+# brew "gradle"
 
-brew "rbenv"
-brew "ruby-build"
+# brew "go"
+# brew "crystal"
 
+# brew "rbenv"
+# brew "ruby-build"
 
 # install programmer-y font
-tap "homebrew/cask-fonts"
-cask "font-fira-code"
-cask "font-hack-nerd-font"
+# tap "homebrew/cask-fonts"
+# cask "font-fira-code"
+# cask "font-hack-nerd-font"
 
-# Instal Heroku
+# Operations
+brew "pdsh"
+
+# Install Heroku
 # tap "heorku/brew" # I've had issues with git credentials here
 # brew "heroku"
-
-# Console Prompt
-brew "starship"
 
 # editor
 cask "visual-studio-code"
 cask "beyond-compare"
 
 # ops dev
-cask "virtualbox"
-cask "vagrant"
+# cask "docker"
 
-# sanity
-cask "iterm2"
-cask "hammerspoon"
-cask "gitup"
-cask "karabiner-elements"
-
-# Browsers
-cask "firefox"
-cask "google-chrome"
-
-cask "jetbrains-toolbox"
-# rider
-# intellij
-# datagrip
-# clion
+#Mac App Store
+brew "mas"
 
 # How to handle from GitHub Actions
 # # Apps From the Apple App Store
@@ -78,5 +92,4 @@ cask "jetbrains-toolbox"
 # mas "Xcode", id: 497799835
 
 # # OMC
-# mas "Trello", id: 1278508951
 # mas "Slack", id: 803453959
