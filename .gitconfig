@@ -4,6 +4,7 @@
 [core]
     editor = code --wait
     autocrlf = false
+    pager = delta
 [delta]
     plus-color = "#012800"
     minus-color = "#340001"
@@ -32,6 +33,7 @@
     pf = push --force-with-lease
     rom = rebase origin/master
     rod = rebase origin/develop
+    rud = rebase upstream/develop
     graph = log --graph --decorate --pretty=oneline --abbrev-commit
     diffdir = difftool --dir-diff --tool=bc3 --no-prompt
 [log]
@@ -51,10 +53,11 @@
 [fetch]
     prune = true
 [pager]
-  branch = cat
+    branch = cat
 [rerere]
     enabled = true
 [pull]
-	ff = only
+    ff = only
+    rebase = true
 [interactive]
     diffFilter = delta --color-only
