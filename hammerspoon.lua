@@ -89,7 +89,8 @@ local zones = {
   column5     = function(fs) return hs.geometry(fs.x + fs.w - 380, fs.y, 380,              fs.h) end,
   hd          = function(fs) return hs.geometry(fs.x+(fs.w-1920)/2,fs.y, 1920,             1080) end,
   leftHd      = function(fs) return hs.geometry(fs.x+(fs.w-1920)/2,fs.y, 960,              1080) end,
-  rightHd     = function(fs) return hs.geometry(fs.x+fs.w/2,       fs.y, 960,              1080) end
+  rightHd     = function(fs) return hs.geometry(fs.x+fs.w/2,       fs.y, 960,              1080) end,
+  obs         = function(fs) return hs.geometry(fs.x,              fs.y, 1920,             1080) end
 }
 
 function moveWindow(win,zone)
@@ -187,6 +188,7 @@ local positions = {
   ['4'] = "column4",
   ['5'] = "column5",
   ['6'] = "rightMost",
+  ['7'] = "obs"
 }
 
 for key, position in pairs(positions) do

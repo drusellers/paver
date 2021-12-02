@@ -60,3 +60,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # set up my fancy prompt
 eval "$(starship init zsh)"
+
+# better switching
+eval "$(zoxide init zsh)"
