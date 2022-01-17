@@ -6,8 +6,8 @@
     autocrlf = false
     pager = delta
 [delta]
-    plus-color = "#012800"
-    minus-color = "#340001"
+    plus-style = "normal #012800"
+    minus-style = "normal #340001"
     syntax-theme = Monokai Extended
 [diff]
     tool = bc3
