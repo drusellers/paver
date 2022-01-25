@@ -10,6 +10,7 @@ cask "iterm2"
 cask "hammerspoon"
 cask "karabiner-elements"
 brew "starship" # command prompt
+cask "cron"
 
 # Unix
 brew "gcc"
@@ -58,9 +59,9 @@ cask "gitup"
 # brew "ruby-build"
 
 # install programmer-y font
-# tap "homebrew/cask-fonts"
-# cask "font-fira-code"
-# cask "font-hack-nerd-font"
+tap "homebrew/cask-fonts"
+cask "font-fira-code"
+cask "font-hack-nerd-font"
 
 # Operations
 brew "pdsh"
@@ -74,7 +75,7 @@ cask "visual-studio-code"
 cask "beyond-compare"
 
 # ops dev
-# cask "docker"
+cask "docker"
 
 #Mac App Store
 brew "mas"
