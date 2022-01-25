@@ -29,7 +29,7 @@ export LDFLAGS="-L/usr/local/opt/libxml2/lib"
 export CPPFLAGS="-I/usr/local/opt/libxml2/include"
 
 # homebrew
-export PATH="/usr/local/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Ruby Set Up
 eval "$(rbenv init -)"
