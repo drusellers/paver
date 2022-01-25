@@ -11,6 +11,7 @@ cask "hammerspoon"
 cask "karabiner-elements"
 brew "starship" # command prompt
 cask "cron"
+cask "obsidian"
 
 # Unix
 brew "gcc"
