@@ -32,7 +32,7 @@ if [ ! -d "$HOME/.config" ]; then
 fi
 
 fancy_echo "Setup .zprofile"
-cp .zprofile ~/.zprofile
+cp .zshrc ~/.zshrc
 # TODO: link to .profile too
 
 # This is where homebrew installs to
