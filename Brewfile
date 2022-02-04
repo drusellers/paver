@@ -43,10 +43,10 @@ brew "bat" # rust "cat" replacement
 brew "git-delta" # better git diff
 cask "gitup"
 # Programming languages
-# brew "node"
-# brew "nvm"
-# brew "yarn"
-# cask "dotnet-sdk"
+brew "node"
+brew "nvm"
+brew "yarn"
+cask "dotnet-sdk"
 # tap "AdoptOpenJDK/openjdk"
 # cask "adoptopenjdk8"
 # cask "adoptopenjdk11"
@@ -56,8 +56,8 @@ cask "gitup"
 # brew "go"
 # brew "crystal"
 
-# brew "rbenv"
-# brew "ruby-build"
+brew "rbenv"
+brew "ruby-build"
 
 # install programmer-y font
 tap "homebrew/cask-fonts"
@@ -82,14 +82,14 @@ cask "docker"
 brew "mas"
 
 # How to handle from GitHub Actions
-# # Apps From the Apple App Store
-# mas "DaisyDisk", id: 411643860
-# mas "Day One", id: 1055511498
-# mas "Evernote", id: 406056744
+# Apps From the Apple App Store
+mas "DaisyDisk", id: 411643860
+mas "Evernote", id: 406056744
+mas "OmniGraffle", id: 1142578753
+mas "Pixelmator", id: 407963104
+mas "The Unarchiver", id: 425424353
 # mas "Fantastical", id: 975937182
-# mas "OmniGraffle", id: 1142578753
-# mas "Pixelmator", id: 407963104
-# mas "The Unarchiver", id: 425424353
+# mas "Day One", id: 1055511498
 # mas "Things", id: 904280696
 # mas "Xcode", id: 497799835
 

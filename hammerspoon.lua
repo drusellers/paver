@@ -12,17 +12,19 @@ hs.window.animationDuration = 0
 
 local apps = {
   -- q = 'Rider.app',
-  -- w = 'Microsoft Teams',
-  -- e = 'Sublime Text',
-  -- r = 'Messages',
+  w = '/Applications/Cron.app',
+  e = 'Visual Studio Code',
+  r = 'Messages',
   -- s = 'Telegram',
   h = 'iTerm',
   t = 'Things',
   -- z = 'Sublime Merge',
   -- x = 'Notes',
-  -- c = 'Discord',
+  d = 'Discord',
   -- v = 'Brave Browser.app',
-  b = 'Google Chrome'
+  b = 'Brave Browser.app'
+  -- g = ''
+  -- t = ''
 }
 
 for key, app in pairs(apps) do
