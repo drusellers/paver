@@ -40,17 +40,12 @@ export PATH="$PATH:/Users/drusellers/Library/Python/3.7/bin"
 # Rust
 source $HOME/.cargo/env
 
-# OMC GitHub Package Repository
-export GPR_AUTH_TOKEN="..."
+
 
 # node / nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
 
-# OMC Stuff
-export PATH="/Users/drusellers/dev/omc/shipit/bin:$PATH"
-export PATH="/Users/drusellers/dev/omc/depot/depot-client/bin:$PATH"
-export DEPOT_BASTION_SECRET="..."
 
 # ACM Stuff
 export PATH="/Users/drusellers/dev/acm/ops-bivy/bin:$PATH"
@@ -63,3 +58,10 @@ eval "$(starship init zsh)"
 
 # better switching
 eval "$(zoxide init zsh)"
+
+# fancy history
+eval "$(atuin init zsh)"
+
+# OMC GitHub Package Repository
+export GPR_AUTH_TOKEN="..."
+export FONTAWESOME_AUTH="..."

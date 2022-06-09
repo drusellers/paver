@@ -28,6 +28,7 @@ brew "wget"
 brew "jq" # json parsing
 brew "tree"
 brew "exa" # rust "ls" replacement with tree support
+brew "atuin" # better history
 
 # Development
 # cask "jetbrains-toolbox"
@@ -62,6 +63,7 @@ brew "ruby-build"
 # install programmer-y font
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
+cask "font-fira-code-nerd-font"
 cask "font-hack-nerd-font"
 
 # Operations
