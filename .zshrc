@@ -14,7 +14,7 @@ alias e=etcdctl
 alias airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
 alias be='bundler exec'
 
-# common scripts
+# common scripts (Adds ~/bin to the path)
 export PATH="$HOME/bin:$PATH"
 
 # found via brew --prefix openssl
@@ -40,28 +40,31 @@ export PATH="$PATH:/Users/drusellers/Library/Python/3.7/bin"
 # Rust
 source $HOME/.cargo/env
 
-
-
-# node / nvm
+# node / nvm (⚠️ this can be slow)
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
-
-
-# ACM Stuff
-export PATH="/Users/drusellers/dev/acm/ops-bivy/bin:$PATH"
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # iterm2 support
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# set up my fancy prompt
+# set up fancy starship 🚀 prompt
 eval "$(starship init zsh)"
 
 # better switching
+# https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
 
 # fancy history
+# https://atuin.sh/
 eval "$(atuin init zsh)"
 
-# OMC GitHub Package Repository
-export GPR_AUTH_TOKEN="..."
-export FONTAWESOME_AUTH="..."
+# GitHub Package Repository
+export CR_PAT="..."
+export FONTAWESOME_NPM_AUTH_TOKEN="..."
+
+# Message Aid Stuff
+export PATH="/Users/drusellers/dev/acm/ops-bivy/bin:$PATH"
+export PATH="/opt/handtools/current/bin:$PATH"
+alias ht="handtools"
+alias htd="dotnet run --project /Users/drusellers/dev/ep/handtools/src/Handtools"
