@@ -12,6 +12,7 @@ cask "karabiner-elements"
 brew "starship" # command prompt
 cask "cron"
 cask "obsidian"
+cask "the-unarchiver"
 
 # Unix
 brew "gcc"
@@ -53,6 +54,8 @@ cask "dotnet-sdk"
 # cask "adoptopenjdk11"
 # brew "leiningen"
 # brew "gradle"
+tap "1password/tap"
+cask "1password-cli"
 
 # brew "go"
 # brew "crystal"
