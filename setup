@@ -77,6 +77,11 @@ if [ "$(uname)" == "Darwin" ]; then
   )
 fi
 
+fancy_echo "Configure dotnet"
+wget "https://dot.net/v1/dotnet-install.sh" -O ~/bin/dotnet-install.sh
+chmod +x ~/bin/dotnet-install.sh
+~/bin/dotnet-install.sh --channel LTS
+
 fancy_echo "Configure Hammerspoon ..."
 mkdir -p ~/.hammerspoon
 cp ./hammerspoon.lua ~/.hammerspoon/init.lua

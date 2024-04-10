@@ -10,9 +10,12 @@ cask "iterm2"
 cask "hammerspoon"
 cask "karabiner-elements"
 brew "starship" # command prompt
-cask "cron"
 cask "obsidian"
 cask "the-unarchiver"
+# calendar option? (fantastical)
+# email option (superhuman)
+tap "1password/tap"
+cask "1password-cli"
 
 # Unix
 brew "gcc"
@@ -28,8 +31,10 @@ brew "curl"
 brew "wget"
 brew "jq" # json parsing
 brew "tree"
-brew "exa" # rust "ls" replacement with tree support
+brew "eza" # rust "ls" replacement with tree support
 brew "atuin" # better history
+brew "bat" # rust "cat" replacement
+brew "zellij" # better multi-plexer
 
 # Development
 # cask "jetbrains-toolbox"
@@ -38,30 +43,32 @@ brew "atuin" # better history
 # datagrip
 # clion
 
+cask "visual-studio-code"
+cask "beyond-compare"
 brew "git"
 brew "vim"
 brew "vaulted" # secure shell environment
-brew "bat" # rust "cat" replacement
 brew "git-delta" # better git diff
 cask "gitup"
+
 # Programming languages
 brew "node"
 brew "nvm"
+brew "uv" # Python https://github.com/astral-sh/uv
 brew "yarn"
-cask "dotnet-sdk"
-# tap "AdoptOpenJDK/openjdk"
-# cask "adoptopenjdk8"
-# cask "adoptopenjdk11"
-# brew "leiningen"
-# brew "gradle"
-tap "1password/tap"
-cask "1password-cli"
-
-# brew "go"
-# brew "crystal"
-
 brew "rbenv"
 brew "ruby-build"
+# dotnet via ./dotnet-install.sh
+
+tap "AdoptOpenJDK/openjdk"
+cask "openjdk8"
+cask "openjdk11"
+cask "openjdk17"
+
+# brew "leiningen"
+# brew "gradle"
+# brew "go"
+# brew "crystal"
 
 # install programmer-y font
 tap "homebrew/cask-fonts"
@@ -71,17 +78,10 @@ cask "font-hack-nerd-font"
 
 # Operations
 brew "pdsh"
-
-# Install Heroku
-# tap "heorku/brew" # I've had issues with git credentials here
-# brew "heroku"
-
-# editor
-cask "visual-studio-code"
-cask "beyond-compare"
-
-# ops dev
 cask "docker"
+brew "lazydocker"
+
+
 
 #Mac App Store
 brew "mas"
@@ -89,14 +89,15 @@ brew "mas"
 # How to handle from GitHub Actions
 # Apps From the Apple App Store
 mas "DaisyDisk", id: 411643860
-mas "Evernote", id: 406056744
-mas "OmniGraffle", id: 1142578753
+mas "Things", id: 904280696
 mas "Pixelmator", id: 407963104
 mas "The Unarchiver", id: 425424353
+
 # mas "Fantastical", id: 975937182
 # mas "Day One", id: 1055511498
-# mas "Things", id: 904280696
 # mas "Xcode", id: 497799835
+# mas "Evernote", id: 406056744
+# mas "OmniGraffle", id: 1142578753
 
 # # OMC
 # mas "Slack", id: 803453959

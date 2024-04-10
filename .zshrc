@@ -35,7 +35,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(rbenv init -)"
 
 # python setup
-export PATH="$PATH:/Users/drusellers/Library/Python/3.7/bin"
+PATH=$(pyenv root)/shims:$PATH
 
 # Rust
 source $HOME/.cargo/env
