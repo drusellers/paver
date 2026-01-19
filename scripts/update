@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# diff .zshrc
+bcomp .zshrc ~/.zshrc
+
+# diff
+bcomp .gitconfig ~/.gitconfig
+
+# diff homebrew
+
+
+# hammerspoon
+bcomp hammerspoon.lua ~/.hammerspoon/init.lua

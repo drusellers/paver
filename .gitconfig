@@ -31,7 +31,9 @@
     new = "!f() { git checkout -b \"dds/$1\"; }; f"
     pnb = push -u origin HEAD
     pf = push --force-with-lease
-    rom = rebase origin/master
+    pushr = push --force-with-lease origin main:release
+    rom = rebase origin/main
+    rum = rebase upstream/main
     rod = rebase origin/develop
     rud = rebase upstream/develop
     graph = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -50,6 +52,7 @@
 [rebase]
     autosquash = true
     autoStash = true
+    updateRefs = true
 [fetch]
     prune = true
 [pager]
@@ -61,3 +64,5 @@
     rebase = true
 [interactive]
     diffFilter = delta --color-only
+[init]
+	defaultBranch = main

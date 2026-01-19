@@ -12,12 +12,12 @@ hs.window.animationDuration = 0
 
 local apps = {
   -- q = 'Rider.app',
-  w = '/Applications/Cron.app',
+  w = '/Applications/Fantastical.app',
   e = 'Visual Studio Code',
   r = 'Messages',
   -- s = 'Telegram',
   h = 'iTerm',
-  t = 'Things',
+  t = '/Applications/Things3.app',
   -- z = 'Sublime Merge',
   -- x = 'Notes',
   d = 'Discord',
@@ -211,17 +211,19 @@ end)
 
 -- move windows between screens (multiple display support)
 
--- hs.hotkey.bind(hyper, "LEFT", function()
---   local win = hs.window.focusedWindow()
---   if not win then return end
---   win:moveOneScreenWest(false, true)
--- end)
+hs.hotkey.bind(hyper, "LEFT", function()
+  local win = hs.window.focusedWindow()
+  if not win then return end
+  win:moveOneScreenWest(false, true)
+  moveWindow(win, "rightHalf")
+end)
 
--- hs.hotkey.bind(hyper, "RIGHT", function()
---   local win = hs.window.focusedWindow()
---   if not win then return end
---   win:moveOneScreenEast(false, true)
--- end)
+hs.hotkey.bind(hyper, "RIGHT", function()
+  local win = hs.window.focusedWindow()
+  if not win then return end
+  win:moveOneScreenEast(false, true)
+  moveWindow(win, "leftHalf")
+end)
 
 -- hs.hotkey.bind(hyper, "UP", function()
 --   local win = hs.window.focusedWindow()
