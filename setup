@@ -26,12 +26,7 @@ if [ ! -f "$HOME/.zshrc" ]; then
   touch "$HOME/.zshrc"
 fi
 
-fancy_echo "Setup .zshrc"
-cp .zshrc ~/.zshrc
-source ~/.zshrc
-
 # TODO: link to .profile too
-
 
 fancy_echo "mkdir -p ~/.config"
 if [ ! -d "$HOME/.config" ]; then
@@ -84,7 +79,7 @@ chmod +x ~/bin/dotnet-install.sh
 
 fancy_echo "Configure Hammerspoon ..."
 mkdir -p ~/.hammerspoon
-cp ./hammerspoon.lua ~/.hammerspoon/init.lua
+cp ./dotfiles/hammerspoon.lua ~/.hammerspoon/init.lua
 
 fancy_echo "Configuring Ruby ..."
 eval "$(rbenv init -)"
@@ -109,9 +104,13 @@ cp ./.config/starship.toml ~/.config/starship.toml
 # eval "$(starship init zsh)"
 
 fancy_echo "Configuring Git ..."
-cp ./.gitconfig ~/.gitconfig
+cp ./dotfiles/gitconfig ~/.gitconfig
 
 fancy_echo "Configuring psqlrc"
 cp ./.psqlrc ~/.psqlrc
+
+fancy_echo "Setup .zshrc"
+cp dotfiles/zshrc ~/.zshrc
+source ~/.zshrc
 
 source ~/.zshrc

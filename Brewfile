@@ -16,6 +16,7 @@ cask "the-unarchiver"
 # email option (superhuman)
 tap "1password/tap"
 cask "1password-cli"
+brew "jordanbaird-ice" # apple bar manager (notch issues)
 
 # Unix
 brew "gcc"
