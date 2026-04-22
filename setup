@@ -15,10 +15,10 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 # bail on the first error
 set -e
 
-# setup our home bin dir
-fancy_echo "Setup ~/bin"
-if [ ! -d "$HOME/bin/" ]; then
-  mkdir "$HOME/bin"
+# setup our local user bin dir (XDG-compatible)
+fancy_echo "Setup ~/.local/bin"
+if [ ! -d "$HOME/.local/bin/" ]; then
+  mkdir -p "$HOME/.local/bin"
 fi
 
 fancy_echo "touch ~/.zshrc"
@@ -73,9 +73,9 @@ if [ "$(uname)" == "Darwin" ]; then
 fi
 
 fancy_echo "Configure dotnet"
-wget "https://dot.net/v1/dotnet-install.sh" -O ~/bin/dotnet-install.sh
-chmod +x ~/bin/dotnet-install.sh
-~/bin/dotnet-install.sh --channel LTS
+wget "https://dot.net/v1/dotnet-install.sh" -O "$HOME/.local/bin/dotnet-install.sh"
+chmod +x "$HOME/.local/bin/dotnet-install.sh"
+"$HOME/.local/bin/dotnet-install.sh" --channel LTS
 
 fancy_echo "Configure Hammerspoon ..."
 mkdir -p ~/.hammerspoon

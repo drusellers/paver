@@ -16,8 +16,8 @@ alias be='bundler exec'
 alias tf='terraform'
 alias dc='docker compose'
 
-# common scripts (Adds ~/bin to the path)
-export PATH="$HOME/bin:$PATH"
+# common scripts (Adds XDG user bin to the path)
+export PATH="$HOME/.local/bin:$PATH"
 
 # found via brew --prefix openssl
 OPEN_SSL_PATH="/opt/homebrew/opt/openssl@3"

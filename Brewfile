@@ -25,7 +25,7 @@ cask "gpg-suite-no-mail" # for gpg keys
 brew "libyaml" # should come after openssl
 brew "the_silver_searcher"
 brew "zsh"
-brew "dog" # better dig
+brew "doggo" # better dig
 brew "zoxide" # better cd
 brew "fzf" # supports zoxide
 brew "curl"
@@ -36,20 +36,22 @@ brew "eza" # rust "ls" replacement with tree support
 brew "atuin" # better history
 brew "bat" # rust "cat" replacement
 brew "zellij" # better multi-plexer
+brew "procs" # a better process explorer
 
 # Development
 # cask "jetbrains-toolbox"
 # rider
 # intellij
 # datagrip
-# clion
+# rustrover
 
 cask "visual-studio-code"
 cask "beyond-compare"
 brew "git"
+brew "jj" # jujutsu SCM
 brew "vim"
 brew "vaulted" # secure shell environment
-brew "git-delta" # better git diff
+brew "git-delta" # better git/jj diff
 cask "gitup"
 
 # Programming languages
