@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# diff .zshrc
-bcomp .zshrc ~/.zshrc
+# zsh
+bcomp config/macos/home/.zshrc ~/.zshrc
 
-# diff
-bcomp .gitconfig ~/.gitconfig
+# git
+bcomp config/shared/home/.gitconfig ~/.gitconfig
 
-# diff homebrew
+# starship
+bcomp config/shared/home/.config/starship.toml ~/.config/starship.toml
 
+# psql
+bcomp config/unix/home/.psqlrc ~/.psqlrc
+
+# ssh
+bcomp config/unix/home/.ssh/config ~/.ssh/config
 
 # hammerspoon
-bcomp hammerspoon.lua ~/.hammerspoon/init.lua
+bcomp config/macos/home/.hammerspoon/init.lua ~/.hammerspoon/init.lua

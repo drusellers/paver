@@ -15,6 +15,26 @@ REPO_ROOT=$(CDPATH= cd "$SCRIPT_DIR/.." && pwd)
 
 trap 'ret=$?; test "$ret" -ne 0 && printf "failed\n\n" >&2; exit "$ret"' EXIT
 
+copy_home_config_layer() {
+  layer_name=$1
+  layer_path=$2
+
+  if [ -d "$layer_path/home" ]; then
+    fancy_echo "Configuring $layer_name config ..."
+    cp -R "$layer_path/home/." "$HOME/"
+  fi
+}
+
+fix_ssh_config_permissions() {
+  if [ -d "$HOME/.ssh" ]; then
+    chmod 700 "$HOME/.ssh"
+  fi
+
+  if [ -f "$HOME/.ssh/config" ]; then
+    chmod 600 "$HOME/.ssh/config"
+  fi
+}
+
 if [ "$(uname)" != "Darwin" ]; then
   fancy_echo "macOS setup can only run on Darwin hosts."
   exit 1
@@ -85,10 +105,6 @@ curl -fsSL "https://dot.net/v1/dotnet-install.sh" -o "$HOME/.local/bin/dotnet-in
 chmod +x "$HOME/.local/bin/dotnet-install.sh"
 "$HOME/.local/bin/dotnet-install.sh" --channel LTS
 
-fancy_echo "Configure Hammerspoon ..."
-mkdir -p "$HOME/.hammerspoon"
-cp "$REPO_ROOT/dotfiles/hammerspoon.lua" "$HOME/.hammerspoon/init.lua"
-
 fancy_echo "Configuring Ruby ..."
 eval "$(rbenv init -)"
 ruby_version=$(find_latest_ruby)
@@ -118,16 +134,9 @@ if [ -r "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
 
-fancy_echo "Configuring Starship"
-cp "$REPO_ROOT/.config/starship.toml" "$HOME/.config/starship.toml"
-
-fancy_echo "Configuring Git ..."
-cp "$REPO_ROOT/dotfiles/gitconfig" "$HOME/.gitconfig"
-
-fancy_echo "Configuring psqlrc"
-cp "$REPO_ROOT/.psqlrc" "$HOME/.psqlrc"
-
-fancy_echo "Setup .zshrc"
-cp "$REPO_ROOT/dotfiles/zshrc" "$HOME/.zshrc"
+copy_home_config_layer "shared" "$REPO_ROOT/config/shared"
+copy_home_config_layer "Unix" "$REPO_ROOT/config/unix"
+copy_home_config_layer "macOS" "$REPO_ROOT/config/macos"
+fix_ssh_config_permissions
 
 fancy_echo "macOS setup complete. Open a new shell to load ~/.zshrc."

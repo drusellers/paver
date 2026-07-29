@@ -10,7 +10,7 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 # Future work:
 # - Install packages with winget/scoop/chocolatey.
 # - Configure PowerShell and Windows Terminal profiles.
-# - Copy or link shared dotfiles.
+# - Apply config/shared and config/windows home config layers.
 # - Configure language runtimes.
 
 Write-Host ""

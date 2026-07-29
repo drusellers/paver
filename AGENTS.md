@@ -11,29 +11,31 @@ Current macOS setup includes:
 Primary flow:
 1. `install/<os>` clones this repo to `~/.bootstrap`
 2. `setup/<os>` performs machine setup and copies config files into `$HOME`
-3. Linux and Windows setup scripts are currently no-op stubs
+3. Linux setup applies shared/Unix config only; Windows setup is currently a no-op stub
 
 ## Important files
 - `install/macos` — macOS entrypoint script for fresh machines
-- `install/linux` — Linux entrypoint stub
+- `install/linux` — Linux entrypoint for shared config setup
 - `install/windows.ps1` — Windows entrypoint stub
 - `setup/macos` — main macOS provisioning script
-- `setup/linux` — Linux setup stub
+- `setup/linux` — Linux shared config setup; package/runtime setup is stubbed
 - `setup/windows.ps1` — Windows setup stub
+- `config/README.md` — layered home config layout (`shared`, `unix`, OS-specific)
+- `config/shared/home/.gitconfig` — Git defaults
+- `config/shared/home/.config/starship.toml` — prompt config copied to `~/.config`
+- `config/unix/home/.ssh/config` — SSH config for macOS/Linux
+- `config/unix/home/.psqlrc` — PostgreSQL shell config for macOS/Linux
+- `config/macos/home/.zshrc` — macOS shell environment and PATH setup
+- `config/macos/home/.hammerspoon/init.lua` — Hammerspoon config
 - `Brewfile` / `Brewfile.lock.json` — macOS package definitions + lock
 - `libexec/helpers` — shared shell helpers used by `setup/macos`
-- `dotfiles/zshrc` — shell environment and PATH setup
-- `dotfiles/gitconfig` — Git defaults
-- `dotfiles/hammerspoon.lua` — Hammerspoon config
-- `.config/starship.toml` — prompt config copied to `~/.config`
-- `.psqlrc` — PostgreSQL shell config
 - `scripts/brew-drift` — detect locally-installed brew packages not tracked in `Brewfile`
-- `scripts/update` — local diff helper for selected dotfiles
+- `scripts/update` — local diff helper for selected config files
 - `.github/workflows/install.yml` — CI runs `setup/macos` on macOS
 
 ## Current install/path conventions
 - User-level executable scripts are stored in `~/.local/bin` (XDG-style)
-- `dotfiles/zshrc` prepends `~/.local/bin` to `PATH`
+- `config/macos/home/.zshrc` prepends `~/.local/bin` to `PATH`
 - Avoid introducing new `~/bin` paths unless explicitly required
 - Prefer XDG base directory standards when practical:
   - config: `~/.config`
@@ -49,9 +51,9 @@ Primary flow:
 4. Quote paths and variables in shell scripts (`"$HOME/..."`).
 5. If changing install behavior, update both:
    - the relevant `setup/<os>` script
-   - any corresponding shell PATH assumptions in `dotfiles/zshrc`
+   - any corresponding shell PATH assumptions in `config/macos/home/.zshrc`
 6. If package installation changes, update `Brewfile` (and lock file only if intentionally regenerated).
-7. Do not commit secrets/tokens. (`dotfiles/zshrc` currently has placeholder-like env var entries; keep/redact carefully.)
+7. Do not commit secrets/tokens. (`config/macos/home/.zshrc` currently has placeholder-like env var entries; keep/redact carefully.)
 
 ## Common validation commands
 Run from repo root:

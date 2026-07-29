@@ -3,8 +3,8 @@
 ########
 # Install bootstrap on Linux.
 #
-# The Linux setup is currently a no-op stub so the repository layout is ready
-# for future Linux work.
+# The Linux setup currently applies shared/Unix config; package/runtime
+# provisioning is still stubbed for future Linux work.
 ########
 
 set -e

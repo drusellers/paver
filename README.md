@@ -5,10 +5,12 @@ Personal machine bootstrap scripts for macOS, Linux, and Windows.
 ## Layout
 
 - `install/macos` clones this repository into `~/.bootstrap` and runs `setup/macos`.
-- `install/linux` clones this repository into `~/.bootstrap` and runs the Linux setup stub.
+- `install/linux` clones this repository into `~/.bootstrap` and runs `setup/linux`.
 - `install/windows.ps1` clones this repository into `~/.bootstrap` and runs the Windows setup stub.
 - `setup/macos` contains the current macOS provisioning flow.
-- `setup/linux` and `setup/windows.ps1` are placeholders for future work.
+- `setup/linux` applies shared/Unix-compatible config; package/runtime setup is still stubbed.
+- `setup/windows.ps1` is a placeholder for future work.
+- `config/shared`, `config/unix`, and `config/<os>` contain layered home-directory config.
 
 Set `BOOTSTRAP_DIR` or `BOOTSTRAP_REPO_URL` to override the default clone location or repository URL.
 
@@ -20,7 +22,7 @@ Set `BOOTSTRAP_DIR` or `BOOTSTRAP_REPO_URL` to override the default clone locati
 
 ## Linux
 
-Linux support is currently stubbed out.
+Linux package/runtime setup is currently stubbed out, but shared and Unix-compatible config is applied.
 
 ```sh
 /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/drusellers/bootstrap/HEAD/install/linux)"

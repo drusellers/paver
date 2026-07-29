@@ -3,12 +3,12 @@
 ########
 # Setup a new Linux machine.
 #
-# This is a no-op stub for future Linux bootstrap work.
+# Linux package/runtime provisioning is still future work. This script currently
+# applies shared and Linux-compatible home config layers.
 #
 # Future work:
 # - Detect supported distributions/package managers.
 # - Install baseline packages.
-# - Copy or link shared dotfiles.
 # - Configure language runtimes.
 ########
 
@@ -17,11 +17,35 @@ set -e
 SCRIPT_DIR=$(CDPATH= cd "$(dirname "$0")" && pwd)
 REPO_ROOT=$(CDPATH= cd "$SCRIPT_DIR/.." && pwd)
 
+copy_home_config_layer() {
+  layer_name=$1
+  layer_path=$2
+
+  if [ -d "$layer_path/home" ]; then
+    printf "\nConfiguring %s config ...\n" "$layer_name"
+    cp -R "$layer_path/home/." "$HOME/"
+  fi
+}
+
+fix_ssh_config_permissions() {
+  if [ -d "$HOME/.ssh" ]; then
+    chmod 700 "$HOME/.ssh"
+  fi
+
+  if [ -f "$HOME/.ssh/config" ]; then
+    chmod 600 "$HOME/.ssh/config"
+  fi
+}
+
 if [ "$(uname)" != "Linux" ]; then
   printf "\nLinux setup can only run on Linux hosts.\n" >&2
   exit 1
 fi
 
-printf "\nLinux setup is stubbed out.\n"
+copy_home_config_layer "shared" "$REPO_ROOT/config/shared"
+copy_home_config_layer "Unix" "$REPO_ROOT/config/unix"
+copy_home_config_layer "Linux" "$REPO_ROOT/config/linux"
+fix_ssh_config_permissions
+
+printf "\nLinux config setup complete. Package/runtime setup remains stubbed out.\n"
 printf "Repository: %s\n" "$REPO_ROOT"
-printf "No changes were made. Future Linux setup should live in setup/linux.\n"
