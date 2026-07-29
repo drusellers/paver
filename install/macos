@@ -1,0 +1,34 @@
+#!/bin/sh
+
+########
+# Install bootstrap on macOS.
+########
+
+set -e
+
+if [ "$(uname)" != "Darwin" ]; then
+  printf "\nmacOS install can only run on Darwin hosts.\n" >&2
+  exit 1
+fi
+
+REPO_URL="${BOOTSTRAP_REPO_URL:-https://github.com/drusellers/bootstrap.git}"
+BOOTSTRAP_DIR="${BOOTSTRAP_DIR:-$HOME/.bootstrap}"
+
+printf "\nInstalling bootstrap for macOS\n"
+
+if [ -d "$BOOTSTRAP_DIR/.git" ]; then
+  printf "Updating %s\n" "$BOOTSTRAP_DIR"
+  git -C "$BOOTSTRAP_DIR" pull --ff-only
+else
+  if [ -e "$BOOTSTRAP_DIR" ]; then
+    printf "ERROR: %s exists but is not a git repository.\n" "$BOOTSTRAP_DIR" >&2
+    exit 1
+  fi
+
+  printf "Cloning %s into %s\n" "$REPO_URL" "$BOOTSTRAP_DIR"
+  git clone "$REPO_URL" "$BOOTSTRAP_DIR"
+fi
+
+BOOTSTRAP_DIR=$(CDPATH= cd "$BOOTSTRAP_DIR" && pwd)
+cd "$BOOTSTRAP_DIR"
+sh "$BOOTSTRAP_DIR/setup/macos"

@@ -1,0 +1,133 @@
+#!/bin/sh
+
+########
+# Setup a new macOS machine.
+########
+
+set -e
+
+SCRIPT_DIR=$(CDPATH= cd "$(dirname "$0")" && pwd)
+REPO_ROOT=$(CDPATH= cd "$SCRIPT_DIR/.." && pwd)
+
+# import common functions
+# shellcheck disable=SC1091
+. "$REPO_ROOT/libexec/helpers"
+
+trap 'ret=$?; test "$ret" -ne 0 && printf "failed\n\n" >&2; exit "$ret"' EXIT
+
+if [ "$(uname)" != "Darwin" ]; then
+  fancy_echo "macOS setup can only run on Darwin hosts."
+  exit 1
+fi
+
+cd "$REPO_ROOT"
+
+# setup our local user bin dir (XDG-compatible)
+fancy_echo "Setup ~/.local/bin"
+mkdir -p "$HOME/.local/bin"
+
+fancy_echo "touch ~/.zshrc"
+if [ ! -f "$HOME/.zshrc" ]; then
+  touch "$HOME/.zshrc"
+fi
+
+# TODO: link to .profile too
+
+fancy_echo "mkdir -p ~/.config"
+mkdir -p "$HOME/.config"
+
+if command -v brew >/dev/null 2>&1; then
+  HOMEBREW_PREFIX=$(brew --prefix)
+else
+  case "$(uname -m)" in
+    arm64) HOMEBREW_PREFIX="/opt/homebrew" ;;
+    *) HOMEBREW_PREFIX="/usr/local" ;;
+  esac
+fi
+
+CURRENT_USER=${LOGNAME:-$(id -un)}
+
+fancy_echo "Setup Homebrew Directory"
+if [ -d "$HOMEBREW_PREFIX" ]; then
+  if ! [ -w "$HOMEBREW_PREFIX" ]; then
+    sudo chown -R "$CURRENT_USER:admin" "$HOMEBREW_PREFIX"
+  fi
+else
+  sudo mkdir -p "$HOMEBREW_PREFIX"
+  sudo chflags norestricted "$HOMEBREW_PREFIX" 2>/dev/null || true
+  sudo chown -R "$CURRENT_USER:admin" "$HOMEBREW_PREFIX"
+fi
+
+##
+# Install Homebrew
+##
+
+if ! command -v brew >/dev/null 2>&1 && [ ! -x "$HOMEBREW_PREFIX/bin/brew" ]; then
+  fancy_echo "Installing Homebrew ..."
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+if [ -x "$HOMEBREW_PREFIX/bin/brew" ]; then
+  eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
+fi
+
+fancy_echo "Updating Homebrew formulae ..."
+brew update
+
+fancy_echo "Installing from Homebrew ..."
+brew bundle check --file="$REPO_ROOT/Brewfile" || (
+  brew bundle --file="$REPO_ROOT/Brewfile"
+  echo
+)
+
+fancy_echo "Configure dotnet"
+curl -fsSL "https://dot.net/v1/dotnet-install.sh" -o "$HOME/.local/bin/dotnet-install.sh"
+chmod +x "$HOME/.local/bin/dotnet-install.sh"
+"$HOME/.local/bin/dotnet-install.sh" --channel LTS
+
+fancy_echo "Configure Hammerspoon ..."
+mkdir -p "$HOME/.hammerspoon"
+cp "$REPO_ROOT/dotfiles/hammerspoon.lua" "$HOME/.hammerspoon/init.lua"
+
+fancy_echo "Configuring Ruby ..."
+eval "$(rbenv init -)"
+ruby_version=$(find_latest_ruby)
+if ! rbenv versions | grep -Fq "$ruby_version"; then
+  openssl_dir=$(brew --prefix openssl@3 2>/dev/null || brew --prefix openssl 2>/dev/null || true)
+  if [ -n "$openssl_dir" ]; then
+    RUBY_CONFIGURE_OPTS="--with-openssl-dir=$openssl_dir" rbenv install -s "$ruby_version"
+  else
+    rbenv install -s "$ruby_version"
+  fi
+fi
+
+rbenv global "$ruby_version"
+rbenv shell "$ruby_version"
+gem update --system
+gem_install_or_update 'bundler'
+number_of_cores=$(sysctl -n hw.ncpu)
+bundle_jobs=1
+if [ "$number_of_cores" -gt 1 ]; then
+  bundle_jobs=$((number_of_cores - 1))
+fi
+bundle config --global jobs "$bundle_jobs"
+
+fancy_echo "Installing Rust ..."
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
+if [ -r "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+
+fancy_echo "Configuring Starship"
+cp "$REPO_ROOT/.config/starship.toml" "$HOME/.config/starship.toml"
+
+fancy_echo "Configuring Git ..."
+cp "$REPO_ROOT/dotfiles/gitconfig" "$HOME/.gitconfig"
+
+fancy_echo "Configuring psqlrc"
+cp "$REPO_ROOT/.psqlrc" "$HOME/.psqlrc"
+
+fancy_echo "Setup .zshrc"
+cp "$REPO_ROOT/dotfiles/zshrc" "$HOME/.zshrc"
+
+fancy_echo "macOS setup complete. Open a new shell to load ~/.zshrc."

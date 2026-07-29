@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
 append_to_zshrc() {
-  local text="$1" zshrc
-  local skip_new_line="${2:-0}"
+  text="$1"
+  zshrc=
+  skip_new_line="${2:-0}"
 
   if [ -w "$HOME/.zshrc.local" ]; then
     zshrc="$HOME/.zshrc.local"
@@ -20,7 +21,8 @@ append_to_zshrc() {
 }
 
 fancy_echo() {
-  local fmt="$1"; shift
+  fmt="$1"
+  shift
 
   # shellcheck disable=SC2059
   printf "\n$fmt\n" "$@"

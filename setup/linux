@@ -1,0 +1,27 @@
+#!/bin/sh
+
+########
+# Setup a new Linux machine.
+#
+# This is a no-op stub for future Linux bootstrap work.
+#
+# Future work:
+# - Detect supported distributions/package managers.
+# - Install baseline packages.
+# - Copy or link shared dotfiles.
+# - Configure language runtimes.
+########
+
+set -e
+
+SCRIPT_DIR=$(CDPATH= cd "$(dirname "$0")" && pwd)
+REPO_ROOT=$(CDPATH= cd "$SCRIPT_DIR/.." && pwd)
+
+if [ "$(uname)" != "Linux" ]; then
+  printf "\nLinux setup can only run on Linux hosts.\n" >&2
+  exit 1
+fi
+
+printf "\nLinux setup is stubbed out.\n"
+printf "Repository: %s\n" "$REPO_ROOT"
+printf "No changes were made. Future Linux setup should live in setup/linux.\n"
