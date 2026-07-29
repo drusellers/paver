@@ -7,6 +7,7 @@
 
 # Productivity
 cask "iterm2"
+cask "ghostty"
 cask "hammerspoon"
 cask "karabiner-elements"
 brew "starship" # command prompt
@@ -16,7 +17,7 @@ cask "the-unarchiver"
 # email option (superhuman)
 tap "1password/tap"
 cask "1password-cli"
-brew "jordanbaird-ice" # apple bar manager (notch issues)
+cask "thaw" # apple bar manager (notch issues)
 
 # Unix
 brew "gcc"
@@ -53,6 +54,8 @@ brew "vim"
 brew "vaulted" # secure shell environment
 brew "git-delta" # better git/jj diff
 cask "gitup"
+brew "worktrunk" # worktree helper
+brew "mise" # execution environment from en.dev
 
 # Programming languages
 brew "node"

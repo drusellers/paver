@@ -1,10 +1,20 @@
 #!/usr/bin/env ruby
 
+def brew_list(*args)
+    `brew #{args.join(' ')}`.split("\n")
+end
+
 # What have I installed recently that I'm not explicitly managing
-installed = `brew ls -1`.split("\n")
+installed = {
+    "brew" => brew_list("list", "--formula", "-1"),
+    "cask" => brew_list("list", "--cask", "-1"),
+}
 
 # Let's exclude things that I know I want and have documented
-wanted = `brew bundle list --all --file Brewfile`.split("\n")
+wanted = {
+    "brew" => brew_list("bundle", "list", "--formula", "--file", "Brewfile"),
+    "cask" => brew_list("bundle", "list", "--cask", "--file", "Brewfile"),
+}
 
 # These got installed some how, but I don't care about them.
 # exclude them from the report
@@ -179,9 +189,11 @@ ignored = [
     'zstd',
 ]
 
-installed.each do |formula|
-    next if ignored.include? formula
-    next if wanted.include? formula
+installed.each do |type, packages|
+    packages.each do |package|
+        next if ignored.include? package
+        next if wanted.fetch(type).include? package
 
-    puts "'#{formula}',"
+        puts %(#{type} "#{package}")
+    end
 end
