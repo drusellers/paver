@@ -31,5 +31,5 @@ Linux support is currently stubbed out.
 Windows support is currently stubbed out.
 
 ```powershell
-irm https://raw.githubusercontent.com/drusellers/bootstrap/HEAD/install/windows.ps1 | iex
+Invoke-RestMethod https://raw.githubusercontent.com/drusellers/bootstrap/HEAD/install/windows.ps1 | Invoke-Expression
 ```
