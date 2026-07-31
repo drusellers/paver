@@ -16,6 +16,30 @@ BOOTSTRAP_DIR="${BOOTSTRAP_DIR:-$HOME/.bootstrap}"
 
 printf "\nInstalling bootstrap for macOS\n"
 
+if ! xcode-select -p >/dev/null 2>&1; then
+  printf "\nXcode Command Line Tools are required before bootstrap can clone this repository.\n"
+  printf "Opening the installer now. Complete the installer dialog to continue bootstrap.\n"
+  xcode-select --install || true
+
+  attempts=120
+  while ! xcode-select -p >/dev/null 2>&1; do
+    if [ "$attempts" -le 0 ]; then
+      printf "\nTimed out waiting for Xcode Command Line Tools installation.\n" >&2
+      printf "Finish installation, then re-run this bootstrap command.\n" >&2
+      exit 1
+    fi
+
+    sleep 15
+    attempts=$((attempts - 1))
+  done
+fi
+
+if ! git --version >/dev/null 2>&1; then
+  printf "\nGit is required before bootstrap can clone this repository.\n" >&2
+  printf "Install Xcode Command Line Tools, then re-run this bootstrap command.\n" >&2
+  exit 1
+fi
+
 if [ -d "$BOOTSTRAP_DIR/.git" ]; then
   printf "Updating %s\n" "$BOOTSTRAP_DIR"
   git -C "$BOOTSTRAP_DIR" pull --ff-only

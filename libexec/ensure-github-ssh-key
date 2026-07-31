@@ -1,0 +1,62 @@
+#!/bin/sh
+
+########
+# Ensure this machine has the GitHub SSH key expected by ~/.ssh/config.
+########
+
+set -e
+
+key_path="$HOME/.ssh/github"
+pub_key_path="$key_path.pub"
+
+fix_ssh_permissions() {
+  if [ -d "$HOME/.ssh" ]; then
+    chmod 700 "$HOME/.ssh"
+  fi
+
+  if [ -f "$HOME/.ssh/config" ]; then
+    chmod 600 "$HOME/.ssh/config"
+  fi
+
+  if [ -f "$key_path" ]; then
+    chmod 600 "$key_path"
+  fi
+
+  if [ -f "$pub_key_path" ]; then
+    chmod 644 "$pub_key_path"
+  fi
+}
+
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+if [ -f "$key_path" ]; then
+  if [ ! -f "$pub_key_path" ]; then
+    printf "GitHub SSH key exists at ~/.ssh/github, but ~/.ssh/github.pub is missing.\n"
+  fi
+
+  fix_ssh_permissions
+  exit 0
+fi
+
+if ! command -v ssh-keygen >/dev/null 2>&1; then
+  printf "ssh-keygen is required to create ~/.ssh/github.\n" >&2
+  exit 1
+fi
+
+key_comment=$(git config --global user.email 2>/dev/null || true)
+if [ -z "$key_comment" ]; then
+  key_user=${USER:-$(id -un)}
+  key_host=$(hostname 2>/dev/null || printf "unknown-host")
+  key_comment="$key_user@$key_host"
+fi
+
+printf "\nGenerating GitHub SSH key ...\n"
+if [ -t 0 ]; then
+  ssh-keygen -q -t ed25519 -C "$key_comment" -f "$key_path"
+else
+  ssh-keygen -q -t ed25519 -C "$key_comment" -f "$key_path" -N ""
+fi
+
+fix_ssh_permissions
+printf "Created GitHub SSH key at ~/.ssh/github. Add ~/.ssh/github.pub to GitHub.\n"

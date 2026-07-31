@@ -12,7 +12,7 @@ Current placement:
 
 - `shared/home/.gitconfig` — Git defaults shared across OSes.
 - `shared/home/.config/starship.toml` — Starship prompt config.
-- `unix/home/.ssh/config` — SSH config for macOS and Linux.
+- `unix/home/.ssh/config` — SSH config for macOS and Linux, including the generated `~/.ssh/github` identity for GitHub hosts.
 - `unix/home/.psqlrc` — psql config for macOS and Linux.
 - `macos/home/.zshrc` — current zsh environment, with macOS/Homebrew assumptions.
 - `macos/home/.hammerspoon/init.lua` — Hammerspoon config.
